@@ -1,0 +1,27 @@
+version: '3.4'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'topcon_mirage'
+      MYSQL_USER: 'topcon'
+      MYSQL_PASSWORD: 'topcon_mirage'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+  app:
+    image: topcon:latest
+    build: .
+    command: npm start
+    ports:
+      - 8080:1337
+    volumes:
+      - ./:/opt/apps/topcon
+    depends_on:
+      mysql:
+        condition: service_healthy
+networks:
+  default:
