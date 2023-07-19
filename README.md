@@ -19,6 +19,7 @@ Application uses MySql 5.7, axios, and mocha with supertest for api testing.
 ### Run in docker
 Make sure you have [docker-compose](https://docs.docker.com/compose/) installed and run `docker-compose up -d`.
 You will notice a delay between mysql going up and the node application because mysql takes quite a bit to be ready to handle connections.
+Application is exposed at port 8080.
 
 ### Run test
 Use `npm run custom-tests` to execute tests.
